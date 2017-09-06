@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="organz">
+
+	<!-- 허주한  -->
+	<select id="selectOrganzList" resultType="organzVo">
+		<![CDATA[
+		select orgnz_no orgnzNo, orgnz_nm orgnzNm, ENG_ORGNZ_NM engOrgnzNm, ORGNZ_DSTNCT orgnzDstnct, 
+		HMPAGE_URL hmpageUrl, TEL_NO telNo, FAX_NO faxNo, ADDR addr, DETAIL_ADDR detailAddr, PRNTS_ORGNZ_NO prntsOrgnzNo, 
+		MAP_PROF_NM mapProfNm, LAB_INTRO labIntro, RSRCHR_INFO_TEXT rsrchrInfoText
+		from organz
+		]]>
+	</select>
+
+	<!-- 허주한  -->
+	<select id="getByNo" resultType="organzVo">
+		<![CDATA[
+		select orgnz_no orgnzNo, orgnz_nm orgnzNm, ENG_ORGNZ_NM engOrgnzNm, ORGNZ_DSTNCT orgnzDstnct, HMPAGE_URL hmpageUrl, TEL_NO telNo, FAX_NO faxNo, ADDR addr, DETAIL_ADDR detailAddr, PRNTS_ORGNZ_NO prntsOrgnzNo, MAP_PROF_NM mapProfNm, LAB_INTRO labIntro, RSRCHR_INFO_TEXT rsrchrInfoText
+		from organz
+		where ORGNZ_DSTNCT='연구실'
+		and orgnz_no = #{no};
+		]]>
+	</select>
+	
+	<!-- 허주한  -->
+	<select id="getResrchAcrsltList" resultType="resrchAcrsltVo">
+		<![CDATA[
+		select r.RESRCH_ACRSLT_NO resrchAcrsltNo, r.ORGNZ_NO orgnzNo, o.ORGNZ_NM orgnzNm, r.ACRSLT_DSTNCT acrsltDstnct, r.REGST_DT regDt, r.RESRCH_YYCL resrchYycl, r.RESRCH_TEXT resrchText
+		from resrch_acrslt r, organz o
+		where r.ORGNZ_NO= #{ no }
+		and r.ORGNZ_NO = o.ORGNZ_NO
+		and (r.ACRSLT_DSTNCT, RESRCH_YYCL) in (select ACRSLT_DSTNCT, max(RESRCH_YYCL)
+												from resrch_acrslt r2
+												where r2.ORGNZ_NO=#{no}
+												group by 1);
+		]]>
+	</select>
+	
+	<!-- 허주한  -->
+	<select id="getResrchAcrsltFetchList" resultType="resrchAcrsltVo"
+		parameterType="map">
+		<![CDATA[
+		select r.RESRCH_ACRSLT_NO resrchAcrsltNo, r.ORGNZ_NO orgnzNo, o.ORGNZ_NM orgnzNm, r.ACRSLT_DSTNCT acrsltDstnctt, r.REGST_DT regDt, r.RESRCH_YYCL resrchYycl, r.RESRCH_TEXT resrchText
+		from resrch_acrslt r, organz o
+		where r.ORGNZ_NO= #{orgNo }
+		and r.ACRSLT_DSTNCT like #{type } 
+		and r.ORGNZ_NO = o.ORGNZ_NO
+		and (r.ACRSLT_DSTNCT, RESRCH_YYCL) not in (select ACRSLT_DSTNCT, max(RESRCH_YYCL)
+												from resrch_acrslt r2
+												where r2.ORGNZ_NO=#{orgNo }
+												group by 1);
+		]]>
+	</select>
+	
+	<!-- 허주한  -->
+	<insert id="insertOrganz" parameterType="organzVo">
+		<![CDATA[
+		insert into organz 
+		values(null, #{orgnzNm}, #{engOrgnzNm}, #{orgnzDstnct}, #{hmpageUrl}, #{telNo}, #{faxNo}, #{addr}, #{detailAddr}, 
+		]]>
+		 
+		<if test="prntsOrgnzNo == -1 ">
+		<![CDATA[ 
+		 null, null, null, null, #{hmnbrdDstnct});
+		]]>
+		</if>
+		<if test="prntsOrgnzNo != -1">
+		<![CDATA[ 
+		 #{prntsOrgnzNo}, null, null, null, #{hmnbrdDstnct});
+		]]>
+		</if>
+	</insert>
+	
+	<!-- 허주한  -->
+	<select id="countResrchAcrslt" parameterType="map" resultType="int">
+		<![CDATA[
+		select count(*)
+		from resrch_acrslt
+		where ORGNZ_NO = #{orgNo}
+		and ACRSLT_DSTNCT like #{type};
+		]]>
+	</select>
+	
+
+</mapper>

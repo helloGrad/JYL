@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="noti">
+
+	<!-- 허규준 -->
+	<select id="getNotiList" resultType="notiVo" parameterType="string">
+			<![CDATA[
+			select SLCTN_NOTI_NO slctnNotiNo, ADMIN_NO adminNo, ORGNZ_NO orgnzNo, SLCTN_NOTI_DSTNCT slctnNotiDstnct, SLCTN_TITLE slctnTitle
+			from slctn_noti
+			where SLCTN_NOTI_DSTNCT like concat('%',#{type},'%');
+			
+			]]>
+	</select>
+
+	<!-- 정예린 -->
+	<select id="getGradByNo" resultType="notiVo" parameterType="int">
+		<![CDATA[
+			select s.SLCTN_NOTI_NO slctnNotiNo, s.ADMIN_NO adminNo, s.ORGNZ_NO orgnzNo,o.orgnzNm, o.addr addr, s.SLCTN_NOTI_DSTNCT slctnNotiDstnct, s.NOTI_REGST_DT notiRegstDt, 
+			date_format(s.SLCTN_BEGIN_DT ,'%Y/%m/%d') slctnBeginDt, date_format(s.SLCTN_END_DT,'%Y/%m/%d') slctnEndDt, 
+			s.SLCTN_TITLE slctnTitle, s.SLCTN_TEXT slctnText,s.SUPRT_QUALF suprtQualf, s.SLCTN_NOPS slctnNops, s.SLSN_MTH slsnMth,
+			s.SBMT_DOC_TEXT sbmtDocText, s.CHRGR_DSTNCT chrgrDstnct,
+			s.CHRGR_NM chrgrNm,s.CHRGR_TEL_NO chrgrTelNo,s.CHRGR_EMAIL chrgrEmail, 
+            s.SLCTN_NOTI_URL slctnNotiUrl, s.RCP_MTH rcpMth, date_format(s.SLSN_BEGIN_DD,'%Y/%m/%d') slsnBeginDd, date_format(s.SLSN_END_DD,'%Y/%m/%d') slsnEndDd,
+			s.SLSN_PLAC slsnPlac,date_format(s.SCCN_ANCM_DD,'%Y/%m/%d') sccnAncmDd,s.SCCN_ANCM_MTH sccnAncmMth,date_format(s.REGST_BEGIN_DD,'%Y/%m/%d') regstBeginDd,
+            date_format(s.REGST_END_DD,'%Y/%m/%d') regstEndDd,s.REGST_MTH regstMth
+			from slctn_noti s, (SELECT  o2.orgnz_no orgnzNo,hierarchy_sys_connect_by_textpath(' ', o2.orgnz_no) AS orgnzNm, o2.addr addr 
+								FROM    (SELECT  hierarchy_connect_by_parent_eq_prior_id_with_level(ORGNZ_NO, 4) AS id,
+                						CAST(@level AS SIGNED) AS level
+        								FROM    (SELECT  @start_with := 0,
+                        								@id := @start_with,
+                        								@level := 0) vars, organz
+        								WHERE   @id IS NOT NULL) o1 JOIN    organz o2 ON      o2.ORGNZ_NO = o1.id) o
+			where s.ORGNZ_NO=o.orgnzNo
+			and s.SLCTN_NOTI_NO=#{no }
+		]]>
+	</select>
+
+	<!-- 박가혜 -->
+	<!-- 정예린-->
+	<select id="getLabByNo" resultType="notiVo" parameterType="int">
+		<![CDATA[
+			select s.SLCTN_NOTI_NO slctnNotiNo, s.ADMIN_NO adminNo, s.ORGNZ_NO orgnzNo,o.orgnzNm, o.addr addr, s.SLCTN_NOTI_DSTNCT slctnNotiDstnct, s.NOTI_REGST_DT notiRegstDt, 
+			date_format(s.SLCTN_BEGIN_DT ,'%Y/%m/%d') slctnBeginDt, date_format(s.SLCTN_END_DT,'%Y/%m/%d') slctnEndDt, 
+			s.SLCTN_TITLE slctnTitle, s.SLCTN_TEXT slctnText,s.SUPRT_QUALF suprtQualf, s.SLCTN_NOPS slctnNops, s.SLSN_MTH slsnMth,
+			s.SBMT_DOC_TEXT sbmtDocText, s.CHRGR_DSTNCT chrgrDstnct,
+            s.TUITION_SUPRT_YN tuitionSuprtYn, s.LVNC_SUPRT_YN lvncSuprtYn, s.BK21_EORGNZ_SUPRT_YN bk21EorgnzSuprtYn, s.INCET_SUPRT_YN incetSuprtYn, s.LRSTY_JOINGFEE_SUPRT_YN lrstyJoingfeeSuprtYn,
+			s.DORM_SUPRT_YN dormSuprtYn, s.INTERN_YN internYn, s.LRSTY_JOING_YN lrstyJoingYn, s.RESRCH_TASK_JOING_YN resrchTaskJoingYn, s.STDTR_OPPTY_SUPRT_YN stdtrOpptySuprtYn,
+			s.EDU_PGM_JOING_SUPRT_YN eduPgmJoingSuprtYn, s.SUPRT_FVR_TEXT suprtFvrText,
+			s.CHRGR_NM chrgrNm,s.CHRGR_TEL_NO chrgrTelNo,s.CHRGR_EMAIL chrgrEmail,
+			s.SUPRT_QUALF suprtQualf, s.ONLINE_SUPRT_YN onlineSuprtYn, s.PRMRY_RESRCH_FIELD prmryResrchField
+			from slctn_noti s, (SELECT  o2.orgnz_no orgnzNo, hierarchy_sys_connect_by_textpath('\n', o2.orgnz_no) AS orgnzNm, o2.addr addr 
+								FROM    (SELECT  hierarchy_connect_by_parent_eq_prior_id_with_level(ORGNZ_NO, 4) AS id,
+                						CAST(@level AS SIGNED) AS level
+        								FROM    (SELECT  @start_with := 0,
+                        								@id := @start_with,
+                        								@level := 0) vars, organz
+        								WHERE   @id IS NOT NULL) o1 JOIN    organz o2 ON      o2.ORGNZ_NO = o1.id) o
+			where s.ORGNZ_NO=o.orgnzNo
+			and s.SLCTN_NOTI_NO=#{no }
+		]]>
+
+	</select>
+
+	<!-- 정예린 -->
+	<insert id="insertNoti" parameterType="map">
+		<![CDATA[
+			 insert into slctn_noti (SLCTN_NOTI_NO, ADMIN_NO, ORGNZ_NO, NOTI_REGST_DT, SLCTN_BEGIN_DT, SLCTN_END_DT, SLCTN_TITLE, SLCTN_TEXT,SUPRT_QUALF, SLCTN_NOPS, SLSN_MTH,
+			SBMT_DOC_TEXT, CHRGR_DSTNCT,CHRGR_NM,CHRGR_TEL_NO,CHRGR_EMAIL, SLCTN_NOTI_DSTNCT,
+		]]>
+		<choose>
+			<when test="tabnm =='grad'">
+				<![CDATA[
+					SLCTN_NOTI_URL, RCP_MTH,SLSN_BEGIN_DD,SLSN_END_DD,SLSN_PLAC,SCCN_ANCM_DD,SCCN_ANCM_MTH,REGST_BEGIN_DD,REGST_END_DD,REGST_MTH)
+				]]>
+			</when>
+			<when test="tabnm =='lab'">
+				<![CDATA[
+					TUITION_SUPRT_YN,LVNC_SUPRT_YN,BK21_EORGNZ_SUPRT_YN,INCET_SUPRT_YN,LRSTY_JOINGFEE_SUPRT_YN,DORM_SUPRT_YN,INTERN_YN,
+					LRSTY_JOING_YN,RESRCH_TASK_JOING_YN,STDTR_OPPTY_SUPRT_YN,EDU_PGM_JOING_SUPRT_YN,SUPRT_FVR_TEXT,ONLINE_SUPRT_YN,PRMRY_RESRCH_FIELD)
+				]]>
+			</when>
+		</choose>
+		<![CDATA[
+	 		values (null,10,#{notiVo.orgnzNo },now(),#{notiVo.slctnBeginDt },#{notiVo.slctnEndDt },
+			#{notiVo.slctnTitle }, #{notiVo.slctnText },#{notiVo.suprtQualf },#{notiVo.slctnNops },#{notiVo.slsnMth },#{notiVo.sbmtDocText },
+			'비회원',#{notiVo.chrgrNm },#{notiVo.chrgrTelNo },#{notiVo.chrgrEmail },		
+		]]>
+		<choose>
+			<when test="tabnm =='grad'">
+				<![CDATA[
+					'대학원',#{notiVo.slctnNotiUrl },#{notiVo.rcpMth },#{notiVo.slsnBeginDd },#{notiVo.slsnEndDd },#{notiVo.slsnPlac },#{notiVo.sccnAncmDd },
+					#{notiVo.sccnAncmMth },#{notiVo.regstBeginDd },#{notiVo.regstEndDd },#{notiVo.regstMth })
+				]]>
+			</when>
+			<when test="tabnm =='lab'">
+				<![CDATA[
+					'연구실',ifnull(#{notiVo.tuitionSuprtYn },'N'),ifnull(#{notiVo.lvncSuprtYn },'N'),ifnull(#{notiVo.bk21EorgnzSuprtYn },'N'),
+					ifnull(#{notiVo.incetSuprtYn },'N'),ifnull(#{notiVo.lrstyJoingfeeSuprtYn },'N'),ifnull(#{notiVo.dormSuprtYn },'N'),
+					ifnull(#{notiVo.internYn },'N'),ifnull(#{notiVo.lrstyJoingYn },'N'),ifnull(#{notiVo.resrchTaskJoingYn },'N'),
+					ifnull(#{notiVo.stdtrOpptySuprtYn },'N'),ifnull(#{notiVo.eduPgmJoingSuprtYn },'N'),#{notiVo.suprtFvrText },ifnull(#{notiVo.onlineSuprtYn },'N'),#{notiVo.prmryResrchField })
+				]]>
+			</when>
+		</choose>
+	</insert>
+
+</mapper>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="counseling">
+
+	<!-- 박가혜 -->
+
+	<insert id="insert" parameterType="counselingVo">
+		<![CDATA[	
+			insert into WETBT (WRTBT_NO, WRTBT_TEXT, WRTBT_TYPE_DSTNCT, AVLBL_BEGIN_DT, AVLBL_END_DT, MB_NO, BBS_NO, WRTBT_DSTNCT,
+			RCMD_CO,NCMD_CO,FIND_CO,
+			 GROUP_NO,ORDER_NO,DEPTH,WRTBT_TITLE, WRITR_INFO_OPNG_YN, CONSL_BBS_DSTNCT,ORGNZ_NO)
+			values (null, #{wrtbtText },'원글',now(),"9999-12-31 23:59:59",#{mbNo }, #{bbsNo },'상담게시판', 0,0,0,( select ifnull( max( GROUP_NO ), 0 ) + 1 from WETBT a ),
+			 1,0,  #{wrtbtTitle }, #{writrInfoOpngYn }, #{conslBbsDstnct }, #{orgnzNo } )
+		]]>
+	</insert>
+
+	
+	
+	<!--박가혜 -->
+		<select id="getcounselingList" resultType="counselingVo" >
+		
+			
+			<![CDATA[
+			select WRTBT_NO wrtbtNo, WRTBT_TEXT wrtbtText, WRTBT_TYPE_DSTNCT wrtbtTypeDstnct, AVLBL_BEGIN_DT avlblBeginDt, AVLBL_END_DT avlblEndDt, MB_NO mbNo,
+			 BBS_NO bbsNo, WRTBT_DSTNCT wrtbtDstnct, RCMD_CO rcmdCo,NCMD_CO ncmdCo,FIND_CO findCo,
+			 GROUP_NO groupNo,ORDER_NO orderNo,DEPTH depth,WRTBT_TITLE wrtbtTitle, 
+			 CONSL_BBS_DSTNCT conslBbsDstnct,ORGNZ_NO orgnzNo, (select count(*) from wetbt e where w. WRTBT_NO= e.PRNTS_WRTBT_NO) count 
+ 			from wetbt w
+ 			where WRTBT_TYPE_DSTNCT='원글'
+ 			order by w.RCMD_CO desc;
+			
+			]]>
+		</select>
+	
+	
+	<!--박가혜 -->
+		<select id="getReplyList" resultType="counselingVo" >
+		
+			
+			<![CDATA[
+			select WRTBT_NO wrtbtNo, BBS_NO bbsNo, WRTBT_DSTNCT wrtbtDstnct,
+             (select MB_NO from wetbt e where w. WRTBT_NO= e.PRNTS_WRTBT_NO group by RCMD_CO desc limit 1) mbNo,
+             (select m.nknm from wetbt e, mb m where w. WRTBT_NO= e.PRNTS_WRTBT_NO and m.mb_no=e.MB_NO  group by RCMD_CO desc limit 1) nknm,
+             (select AVLBL_BEGIN_DT from wetbt e where w. WRTBT_NO= e.PRNTS_WRTBT_NO    group by RCMD_CO desc limit 1) avlblBeginDt,
+             (select WRTBT_TEXT  from wetbt e where w. WRTBT_NO= e.PRNTS_WRTBT_NO    group by RCMD_CO desc limit 1) wrtbtText,
+             (select RCMD_CO  from wetbt e where w. WRTBT_NO= e.PRNTS_WRTBT_NO   group by RCMD_CO desc limit 1) rcmdCo          
+			 from wetbt w
+			 where WRTBT_TYPE_DSTNCT='원글'
+			 order by RCMD_CO desc;
+			
+			]]>
+		</select>
+	
+		<!-- 박가혜   -->
+	<select id="getcounselingPrnts" parameterType="long" resultType="counselingVo">
+		<![CDATA[
+		select w.WRTBT_NO wrtbtNo,w.WRTBT_TEXT wrtbtText, w.WRTBT_TYPE_DSTNCT wrtbtTypeDstnct, date_format(w.AVLBL_BEGIN_DT,"%Y-%m-%d %H:%i::%s") avlblBeginDt, w.AVLBL_END_DT avlblEndDt, w.MB_NO mbNo,
+			 w.BBS_NO bbsNo, w.WRTBT_DSTNCT wrtbtDstnct, w.RCMD_CO rcmdCo,w.NCMD_CO ncmdCo,w.FIND_CO findCo,
+			 w.GROUP_NO groupNo,w.ORDER_NO orderNo,w.DEPTH depth,w.WRTBT_TITLE wrtbtTitle, w.WRITR_INFO_OPNG_YN writrInfoOpngYn,
+			 w.CONSL_BBS_DSTNCT conslBbsDstnct,w.ORGNZ_NO orgnzNo, TRUNCATE(date_format(now(),"%Y-%m-%d %H:%i::%s")-date_format(m.BIRDT,"%Y-%m-%d %H:%i::%s"), -1) birdt, substr(m.AGRG,1,2) agrg, m.NKNM nknm
+		from wetbt w, mb m
+		where w.MB_NO = m.MB_NO
+		and w.WRTBT_NO=#{no};
+		]]>
+	</select>
+	
+	
+		<!--박가혜 -->
+		<select id="getReplyDetail" parameterType="long" resultType="counselingVo" >
+		
+			
+			<![CDATA[
+			select w.WRTBT_NO wrtbtNo,w.WRTBT_TEXT wrtbtText, w.WRTBT_TYPE_DSTNCT wrtbtTypeDstnct, date_format(w.AVLBL_BEGIN_DT,"%Y-%m-%d %H:%i::%s") avlblBeginDt, w.AVLBL_END_DT avlblEndDt, w.MB_NO mbNo,
+			 w.BBS_NO bbsNo, w.WRTBT_DSTNCT wrtbtDstnct, w.RCMD_CO rcmdCo,w.NCMD_CO ncmdCo,w.FIND_CO findCo,
+			 w.GROUP_NO groupNo,w.ORDER_NO orderNo,w.DEPTH depth,w.WRTBT_TITLE wrtbtTitle,
+			 w.PRNTS_WRTBT_NO prntsWrtbtNo, w.CWR_DSTNCT cwrDstnct, 
+			 w.WRITR_INFO_OPNG_YN writrInfoOpngYn,
+			 w.CONSL_BBS_DSTNCT conslBbsDstnct,w.ORGNZ_NO orgnzNo, 
+			 TRUNCATE(date_format(now(),"%Y-%m-%d %H:%i::%s")-date_format(m.BIRDT,"%Y-%m-%d %H:%i::%s"), -1) birdt, substr(m.AGRG,1,2) agrg, m.NKNM nknm
+			from wetbt w, mb m
+			where w.MB_NO = m.MB_NO
+			and w.PRNTS_WRTBT_NO=#{no}
+			order by w.RCMD_CO desc;
+			
+			]]>
+		</select>
+		
+		
+			<!-- 박가혜 -->
+
+	<insert id="insertReply" parameterType="counselingVo">
+		<![CDATA[	
+			insert into WETBT (WRTBT_NO, WRTBT_TEXT, WRTBT_TYPE_DSTNCT, AVLBL_BEGIN_DT, AVLBL_END_DT, MB_NO, BBS_NO, WRTBT_DSTNCT,
+			RCMD_CO,NCMD_CO,FIND_CO,GROUP_NO,ORDER_NO,DEPTH,
+		    PRNTS_WRTBT_NO, CWR_DSTNCT, WRITR_INFO_OPNG_YN, CONSL_BBS_DSTNCT,ORGNZ_NO)
+			values (null, #{wrtbtText },'답글',now(),"9999-12-31 23:59:59",#{mbNo }, #{bbsNo },'상담게시판', 0,0,0,
+			(select GROUP_NO from WETBT a where wrtbt_no=#{prntsWrtbtNo }),
+			(select max(ORDER_NO)+1 from WETBT a where wrtbt_no=#{prntsWrtbtNo }),
+			 1,#{prntsWrtbtNo }, '답변글', #{writrInfoOpngYn },
+			 (select CONSL_BBS_DSTNCT from WETBT a where WRTBT_NO=#{prntsWrtbtNo }), #{orgnzNo } )
+		]]>
+	</insert>
+	
+	<!-- 박가혜 -->
+
+		<update id="updateFindCo" parameterType="long">
+			<![CDATA[
+				update WETBT set FIND_CO=FIND_CO+1 where WRTBT_NO=#{no }
+			]]>
+			
+		</update>
+
+	<!-- 박가혜 -->
+	<select id="getLike" parameterType="map" resultType="counselingVo">
+		<![CDATA[
+		select m.WRTBT_NO wrtbtNo,m.MB_NO mbNo,m.INFO_DSTNCT infroDstnct
+		from mb_by_wrtbt_info m, wetbt w
+		where m.WRTBT_NO = w.WRTBT_NO 
+		and ((m.WRTBT_NO=#{no} and m.MB_NO=#{mbNo}) or (w.PRNTS_WRTBT_NO=#{no} and m.MB_NO=#{mbNo})) ;
+		]]>
+	</select>
+	
+		<!-- 박가혜 -->
+	<select id="selectLikeOne" parameterType="map" resultType="counselingVo">
+		<![CDATA[
+		select m.WRTBT_NO wrtbtNo,m.MB_NO mbNo,m.INFO_DSTNCT infroDstnct,w.RCMD_CO rcmdCo,w.NCMD_CO ncmdCo
+		from mb_by_wrtbt_info m,wetbt w
+		where m.WRTBT_NO = w.WRTBT_NO and m.WRTBT_NO=#{no} and m.MB_NO=#{mbNo};
+		]]>
+	</select>
+	
+	
+	<!-- 박가혜 -->
+	<delete id="deleteLike" parameterType="map">
+	<![CDATA[
+	
+		delete from mb_by_wrtbt_info where WRTBT_NO=#{wrtbtNo } and MB_NO=#{mbNo };
+		
+	]]>
+	
+	</delete>
+	
+	<!-- 박가혜 -->
+
+	<update id="updateDownLike" parameterType="map">
+			<![CDATA[
+				update wetbt set RCMD_CO=RCMD_CO-1 where WRTBT_NO=#{wrtbtNo }
+			]]>
+			
+	</update>
+	
+	<!-- 박가혜 -->
+
+	<update id="updateDownDislike" parameterType="map">
+			<![CDATA[
+				update wetbt set NCMD_CO=NCMD_CO-1 where WRTBT_NO=#{wrtbtNo }
+			]]>
+			
+	</update>
+	
+	
+	
+	<!-- 박가혜 -->
+
+	<insert id="insertLike" parameterType="map">
+		<![CDATA[	
+			insert into mb_by_wrtbt_info (WRTBT_NO, MB_NO, INFO_DSTNCT) values (#{wrtbtNo },#{mbNo },#{infroDstnct });
+		]]>
+	</insert>
+	
+	
+		<!-- 박가혜 -->
+
+	<update id="updateUpLike" parameterType="map">
+			<![CDATA[
+				update wetbt set RCMD_CO=RCMD_CO+1 where WRTBT_NO=#{wrtbtNo }
+			]]>
+			
+	</update>
+	
+	<!-- 박가혜 -->
+
+	<update id="updateUpDislike" parameterType="map">
+			<![CDATA[
+				update wetbt set NCMD_CO=NCMD_CO+1 where WRTBT_NO=#{wrtbtNo }
+			]]>
+			
+	</update>
+
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+	<!-- 정예린 박가혜 -->
+
+	<insert id="insert" parameterType="memberVo">
+		<![CDATA[	
+			insert into MB (MB_NO, MB_DSTNCT, GENAL_MB_DSTNCT, NKNM, IDEN, PW, SEX, birdt, MYSELF_AUTHZ_YN, INSRD_DD, WTHDR_DD,INFO_YN )
+			values (null, '일반회원','일반가입',#{nknm },#{iden },password(#{pw }),#{sex },#{birdt }, 'N',date_format(now(),'%Y%m%d'),'99991231', 'N')
+		]]>
+	</insert>
+
+	<insert id="snsinsert" parameterType="map">
+		<![CDATA[
+			insert into MB (MB_NO, MB_DSTNCT, MB_NM, NKNM, IDEN, SEX, MYSELF_AUTHZ_YN, INSRD_DD, WTHDR_DD, GENAL_MB_DSTNCT, SNS_TKN_VALUE, INFO_YN, SNS_DSTNCT
+		]]>
+		<choose>
+			<when test="snsnm =='fb'">
+				<![CDATA[
+					, BIRDT)
+				]]>
+			</when>
+			<when test="snsnm =='naver'">
+				<![CDATA[
+					, AGRG)  
+				]]>
+			</when>
+		</choose>
+		
+	<![CDATA[
+	 		values (null,'일반회원', #{memberVo.mbNm }, #{memberVo.nknm }, #{memberVo.iden }, #{memberVo.sex },'Y',date_format(now(),'%Y%m%d'),'99991231','SNS가입', #{memberVo.snsTknValue },'N',		
+		]]>
+		
+		<choose>
+			<when test="snsnm =='fb'">
+				<![CDATA[
+					'페이스북', #{memberVo.birdt })
+				]]>
+			</when>
+			<when test="snsnm =='naver'">
+				<![CDATA[
+					'네이버', #{memberVo.agrg })
+				]]>
+			</when>
+		</choose>
+	</insert>
+
+
+	<select id="getByToken" parameterType="memberVo" resultType="memberVo">
+	<![CDATA[
+		select * 
+		from MB 
+		where SNS_TKN_VALUE='${snsTknValue }'		
+	]]>
+	</select>
+
+	<select id="getByIden" parameterType="string" resultType="memberVo">
+	<![CDATA[
+	
+		select * 
+		from MB 
+		where IDEN=#{iden }		
+	]]>
+	</select>
+
+	<select id="getByLoginInfo" parameterType="map" resultType="memberVo">  <!-- 객체면 변수 이름으로 해야함 uservo 일경우 vo로, 반환할 타입이 마땅히 없는 경우 map -->
+		<![CDATA[
+		select MB_NO as "mbNo",IDEN as "iden",MB_DSTNCT as "mbDstnct",NKNM as "nknm",INFO_YN infoYn
+		from mb 
+		where IDEN=#{iden } 
+		and PW=password(#{pw })
+		]]>
+	</select>
+
+	<select id="getByCode" parameterType="long" resultType="codeVo">  
+		<![CDATA[
+		select cd.CD_ID as "cdId",CD_NM as "cdNm",CD_DSTNCT as "cdDstnct"
+		from mb_info mi,CD 
+		where mi.CD_ID = CD.CD_ID 
+		and MB_NO =#{mbNo } 
+		]]>
+	</select>
+
+	<insert id="insertMbinfo" parameterType="map">
+	<![CDATA[
+		insert into mb_info values (#{mbNo }, #{information })
+	]]>
+	</insert>
+
+	<delete id="deleteMbinfo" parameterType="long">
+	<![CDATA[	
+		delete from mb_info where MB_NO=#{mbNo }		
+	]]>
+	</delete>
+
+	<!-- 박가혜 -->
+
+	<select id="getBySns" parameterType="String" resultType="memberVo"> 
+		<![CDATA[
+		select MB_NO mbNo, MB_DSTNCT mbDstnct, MB_NM mbNm, NKNM nknm, IDEN iden, PW pw, SEX sex, BIRDT birdt, MYSELF_AUTHZ_YN myselfAuthzYn, 
+		INSRD_DD insrdDd, WTHDR_DD wthdrDd, GENAL_MB_DSTNCT genalMbDstnct, SNS_TKN_VALUE snsTknValue, SNS_DSTNCT snsDstnct, AGRG agrg,INFO_YN infoYn
+		from mb 
+		where IDEN=#{iden } 
+		]]>
+	</select>
+
+
+	<select id="getBySnsToken" parameterType="String" resultType="memberVo"> 
+		<![CDATA[
+		select MB_NO mbNo, MB_DSTNCT mbDstnct, MB_NM mbNm, NKNM nknm, IDEN iden, PW pw, SEX sex, BIRDT birdt, MYSELF_AUTHZ_YN myselfAuthzYn, 
+		INSRD_DD insrdDd, WTHDR_DD wthdrDd, GENAL_MB_DSTNCT genalMbDstnct, SNS_TKN_VALUE snsTknValue, SNS_DSTNCT snsDstnct, AGRG agrg,INFO_YN infoYn
+		from mb 
+		where SNS_TKN_VALUE=#{token } 
+		]]>
+	</select>
+
+
+
+	<!-- 박가혜 2017-08-31 -->
+
+	<update id="updateInfoYn" parameterType="Long">
+			<![CDATA[
+				update mb set INFO_YN='Y' where MB_NO=#{mbNo }
+			]]>
+
+	</update>
+
+	<select id="existNknm" parameterType="String" resultType="memberVo">
+		<![CDATA[
+			select NKNM nknm
+			from mb
+			where nknm = #{nknm};
+		]]>
+	</select>
+
+</mapper>
