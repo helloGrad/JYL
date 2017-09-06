@@ -68,25 +68,7 @@ function getUserData(access_token) {
 	});
 }
 
-// 페이스북 로그인 버튼 클릭 시 토큰을 이용한 사용자 정보 가져와서 통신
 
-document.getElementById('loginBtn').addEventListener('click', function() {
-	// do the login
-	FB.login(function(response) {
-		if (response.authResponse) {
-			access_token = response.authResponse.accessToken; // get access
-			// token
-			user_id = response.authResponse.userID; // get FB UID
-			console.log('access_token = ' + access_token);
-			console.log('user_id = ' + user_id);
-			getUserData(access_token);
-		}
-	}, {
-		scope : 'email,public_profile,user_birthday',
-		return_scopes : true
-	});
-
-}, false);
 
 
 
@@ -148,6 +130,31 @@ $(function() {
 				$(this).find("#naverLogo").css("background-size", 'cover');
 				$(this).find(".btn-social").css('background-color', '#1EC800');
 			});
+	
+	// 페이스북 로그인 버튼 클릭 시 토큰을 이용한 사용자 정보 가져와서 통신
+
+	document.getElementById('loginBtn').addEventListener('click', function() {
+		// do the login
+		FB.login(function(response) {
+			if (response.authResponse) {
+				access_token = response.authResponse.accessToken; // get access
+				// token
+				user_id = response.authResponse.userID; // get FB UID
+				console.log('access_token = ' + access_token);
+				console.log('user_id = ' + user_id);
+				getUserData(access_token);
+			}
+		}, {
+			scope : 'email,public_profile,user_birthday',
+			return_scopes : true
+		});
+
+	}, false);
+	
+	$('#facebookLogin').click(function(){
+		console.log('22');
+		$('#loginBtn').click();
+	})
 
 })
 

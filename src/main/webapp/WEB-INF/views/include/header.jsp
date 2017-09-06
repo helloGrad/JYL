@@ -172,8 +172,6 @@
 					<span id="facebooklogo" class="fa fa-facebook"></span> 페이스북으로 계속하기
 				</button>
 
-
-
 				<button id="naverLoginBtn2"
 					class="btn btn-social socialbtn naverlogin" style='color: white;'>
 					<span id='naverLogo' class="fa "></span> 네이버로 계속하기
