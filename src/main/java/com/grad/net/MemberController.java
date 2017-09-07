@@ -26,7 +26,7 @@ import com.grad.net.vo.MemberVo;
 
 /*
  * 정예린,박가혜
- */	
+ */
 @Controller
 @RequestMapping("/user")
 public class MemberController {
@@ -37,27 +37,24 @@ public class MemberController {
 	@Autowired
 	CodeService codeService;
 
-
 	/////////////////////////////////////// snslogin//////////////////////////////////////////
 
 	/*
 	 * 정예린,박가혜
-	 */	
+	 */
 	@RequestMapping(value = "/snslogin", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {
 		System.out.println("snslogin naver get");
 		return "snslogin";
 	}
 
-
 	/////////////////////////////// mypage 세션 확인 ///////////////////////////////////
 
 	@Auth(role = Auth.Role.USER)
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String mypage(Locale locale, Model model,@AuthUser MemberVo authUser) {
-		System.out.println(authUser.getMbDstnct());
-		
-		
+	public String mypage(Locale locale, Model model, @AuthUser MemberVo authUser) {
+
+
 		return "mypage";
 	}
 
@@ -65,21 +62,15 @@ public class MemberController {
 
 	/*
 	 * 박가혜
-	 */	
+	 */
 	@Auth(role = Auth.Role.USER)
 	@RequestMapping(value = "/mbinfo", method = RequestMethod.GET)
-	public String mbinfo(Locale locale, Model model, @AuthUser MemberVo authUser
-			) {
+	public String mbinfo(Locale locale, Model model, @AuthUser MemberVo authUser) {
 
-		
-	
-		
-
-		//List<CodeVo> userCodeVo = memberService.getMbinfoList(authUser);
-		//List<CodeVo> codeVo = codeService.getCodeList();
-		//model.addAttribute("Codelist", codeVo);
-		//model.addAttribute("informationlist", userCodeVo);
-		
+		// List<CodeVo> userCodeVo = memberService.getMbinfoList(authUser);
+		// List<CodeVo> codeVo = codeService.getCodeList();
+		// model.addAttribute("Codelist", codeVo);
+		// model.addAttribute("informationlist", userCodeVo);
 
 		return "mbinfo";
 	}
@@ -91,31 +82,25 @@ public class MemberController {
 
 		Long mbNo = authUser.getMbNo();
 		List<String> information = new ArrayList<String>();
-		
-		
-			
-			
-			// System.out.println("사용자 번호 ; "+authUser.getMbNo());
-			// System.out.println("===cnt : "+cnt);
 
-			for (int j = 1; j <= cnt; j++) {
-				for (int i = 0; i < request.getParameterValues("ch" + String.valueOf(j)).length; i++) {
-					information.add(request.getParameterValues("ch" + String.valueOf(j))[i]);
-				}
+		// System.out.println("사용자 번호 ; "+authUser.getMbNo());
+		// System.out.println("===cnt : "+cnt);
+
+		for (int j = 1; j <= cnt; j++) {
+			for (int i = 0; i < request.getParameterValues("ch" + String.valueOf(j)).length; i++) {
+				information.add(request.getParameterValues("ch" + String.valueOf(j))[i]);
 			}
-//			memberService.registerMbinfo(mbNo, information);
-			return "redirect:/user/mbinfo";
-		
-			
-	}
+		}
+		// memberService.registerMbinfo(mbNo, information);
+		return "redirect:/user/mbinfo";
 
-		
+	}
 
 	@RequestMapping(value = "/mbinfo/modify", method = RequestMethod.POST)
 	public String mbinfoModifiy(@AuthUser MemberVo authUser,
 			@RequestParam(value = "info", required = true, defaultValue = "") String[] info) {
 
-		//memberService.updateMbinfo(authUser.getMbNo(), info);
+		// memberService.updateMbinfo(authUser.getMbNo(), info);
 		return "redirect:/user/mbinfo";
 	}
 }

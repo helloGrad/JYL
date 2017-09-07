@@ -1,0 +1,12 @@
+.nav-line {
+	height: 0.2em;
+	background-color: black;
+}
+
+ul {
+	list-style: none;
+}
+
+.mypage-input {
+	width : 90%;
+}

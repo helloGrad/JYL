@@ -101,7 +101,6 @@ public class MemberController {
 		System.out.println("존재하는 회원입니까? " + exist);
 
 		if (exist != true) {
-			System.out.println(snsnm);
 			memberService.snslogin(memberVo, snsnm); //회원가입 
 		}
 

@@ -48,6 +48,10 @@ $(function() {
 				"display" : "none"
 			});
 			initLoginModal();
+			$("#signup").css({
+				"display" : "none"
+			});
+			initLoginModal();
 		});
 		$("html").click(function(event) {
 			if (event.target.id === "login") {
@@ -113,7 +117,7 @@ var modalOpen2 = function() {
 	}
 
 	$(".close").click(function() {
-		$("#signup1").css({
+		$("#signup").css({
 			"display" : "none"
 		});
 		initSignupModal();
