@@ -30,7 +30,6 @@ $(function() {
  */
 function changeColor(obj) {
 
-	console.log("성별 확인"+obj.value);
 	$(".genderlabel").removeClass("on");
 	$("#" + obj.value).addClass("on");
 

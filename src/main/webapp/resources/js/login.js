@@ -151,12 +151,14 @@ $(function() {
 
 	}, false);
 	
+
+
+})
+
 	$('#facebookLogin').click(function(){
 		console.log('22');
 		$('#loginBtn').click();
 	})
-
-})
 
 var login = function() {
 
@@ -204,6 +206,7 @@ var login = function() {
 
 							// }else{
 
+							/* 로그인 메인 화면 url 변경 */
 							parent.window.location.href = "/net/";
 
 							// }

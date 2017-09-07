@@ -29,8 +29,6 @@ public class HomeController {
 		System.out.println(memberVo.getEmail());		
 		
 		
-		
-		
 		return "home";
 	}
 	
