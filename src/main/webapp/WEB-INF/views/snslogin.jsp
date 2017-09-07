@@ -63,16 +63,13 @@
 						console.error(response.message);
 						return;
 					}
-
-
 					
 					/**
 					 * 박가혜 2017-08-31 맞춤정보 제안 페이지
 					 */
 					
-						if(response.data.infoYn == "N" ) { //건너뛰기 안헀으면 
-							
-						
+					 parent.window.location.href = "/net/main2/";
+					/*	if(response.data.infoYn == "N" ) { //건너뛰기 안헀으면 					
 						
 							parent.window.location.href = "/net/user/mbinfo";
 							
@@ -80,9 +77,7 @@
 							parent.window.location.href = "/net/";
 						
 							
-						}
-					
-					
+						}*/			
 
 				},
 				error : function(jqXHR, status, e) {

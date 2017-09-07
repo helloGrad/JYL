@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.grad.net.security.Auth;
 import com.grad.net.vo.MemberVo;
 
 
@@ -19,9 +20,9 @@ public class HomeController {
 	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home( Model model, MemberVo memberVo) {	
+	public String home1( Model model, MemberVo memberVo) {	
 		model.addAttribute("MemberVo", memberVo);		
-		return "home";
+		return "main1";
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
@@ -32,6 +33,15 @@ public class HomeController {
 		return "home";
 	}
 	
+
+	//@Auth(role = Auth.Role.USER)
+	@RequestMapping(value = "/main2", method = RequestMethod.GET)
+	public String home2( Model model, MemberVo memberVo) {	
+		model.addAttribute("MemberVo", memberVo);		
+		return "main2";
+	}
+	
+
 
 	
 	

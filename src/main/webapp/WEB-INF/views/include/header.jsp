@@ -7,8 +7,6 @@
 <head>
 <base target="_self" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="google-signin-client_id"
-	content="31840955156-0oh8u23d3t24v4rguka78knp12vo9jm4.apps.googleusercontent.com">
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -27,8 +25,8 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/higrad-signup.css"
 	rel="stylesheet">
-
-
+<link href="${pageContext.request.contextPath}/resources/css/login.css"
+	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath}/resources/css/bootstrap-social.css"
 	rel="stylesheet">
@@ -37,8 +35,6 @@
 	rel="stylesheet">
 
 
-<link href="${pageContext.request.contextPath}/resources/css/login.css"
-	rel="stylesheet">
 
 
 <title>하이그래드넷</title>
@@ -53,7 +49,7 @@
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand"
-				href="${pageContext.servletContext.contextPath }/">하이그래드넷</a>
+				href="${pageContext.servletContext.contextPath }/main2">하이그래드넷</a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">
@@ -94,73 +90,47 @@
 		</div>
 	</div>
 
-
+	
+	<!-- 로그인 modal-->
 	<div id="login" class="modal">
 		<div class="modal-content">
-
-
 			<span class="close">×</span>
-
-
 			<div class="signupbnt">
-
-
-				<a id="loginBtn" class="btn btn-social btn-facebook socialbtn">
+				<button id="loginBtn" class="btn btn-social btn-facebook socialbtn">
 					<span class="fa fa-facebook"></span> 페이스북 아이디로 로그인
-				</a>
-
-
+				</button>
 				<div id="naver_id_login"></div>
-
-
 				<div class="login-devider">
 					<span>또는</span>
 				</div>
-
-
 
 				<div class="form-group1">
 					<input type="text" class="form-control logininputbox" id="email"
 						name="iden" placeholder="Enter email">
 				</div>
-
 				<div id='emailMsg' class="text-danger"></div>
-
 				<div class="form-group1">
 					<input type="password" class="form-control logininputbox" id="pwd"
 						name="pw" placeholder="Enter password">
 				</div>
-
-
 				<div id="passwdMsg" class="text-danger"></div>
-
 				<div id="loginMsg" class="text-danger"></div>
-
 				<div class="form-group">
 					<label class="remember-me"><input type="checkbox">
 						로그인 상태 유지 </label>
-
 					<p class="sighup">
 						<a href="javascript:void(0);" onclick="modalOpen3();">비밀번호 찾기</a>
 						/ <a href="javascript:void(0);" onclick="modalOpen2();">회원가입</a>
 					</p>
-
 				</div>
-
-
-
 				<button type="submit" class="btn formbtn" onclick="login();">로그인</button>
 				<div class="login"></div>
-
-
 			</div>
-
 			<span class="close"></span>
 		</div>
 	</div>
 
-
-
+	<!-- 회원가입 modal -->
 	<div id="signup" class="modal">
 		<div class="modal-content">
 			<span class="close">×</span>
@@ -178,9 +148,6 @@
 				</button>
 
 			</div>
-
-
-
 			<div class="separator">
 				<hr class="signuphr">
 				<h6 class="texthr">또는</h6>
@@ -212,21 +179,16 @@
 							id="rpwd_again">
 						<div class="checkinput" id="pwdcheck2">경고</div>
 					</div>
-
 					<hr class="loginhr">
-
-
-					<div class="gender" >
-						<label class="genderlabel on" id="M"> <input
-							type="radio" name="sex" value="M" id="radiomale" checked
+					<div class="gender">
+						<label class="genderlabel on" id="M"> <input type="radio"
+							name="sex" value="M" id="radiomale" checked
 							onclick="changeColor(this);"> 남자
-						</label> <label class="genderlabel" id="F"> <input
-							type="radio" name="sex" value="F" id="radiofemale"
+						</label> <label class="genderlabel" id="F"> <input type="radio"
+							name="sex" value="F" id="radiofemale"
 							onclick="changeColor(this);">여자
 						</label>
 					</div>
-
-
 					<div class="birth">
 						<input type="number" name="birdt" maxlength="4" id="birthy"
 							max="9999" min="1900" maxlength="4"
@@ -251,17 +213,11 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
 </nav>
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
-
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/login.js"></script>
-
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/signup.js"></script>
