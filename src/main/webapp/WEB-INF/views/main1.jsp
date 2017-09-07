@@ -25,8 +25,10 @@
 
 <script type="text/javascript">
 	$(window).scroll(function() {
-		$(".navbar.navbar-default.navbar-fixed-top.al").css("opacity", 1 - $(window).scrollTop() / 250);
+		$("#myNavbar").css("opacity", 1 - $(window).scrollTop() / 250);
+		$(".navbar-brand").css("opacity", 1 - $(window).scrollTop() / 250);
 	});
+
 </script>
 </head>
 <body>
