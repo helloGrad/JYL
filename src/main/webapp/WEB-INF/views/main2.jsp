@@ -52,7 +52,6 @@
 		    });
 		    $( "#amount" ).val( $( "#slider-range-max" ).slider( "value" )+"만 원" );
 		  } );
-
 	function changeClass(obj) {
 		
 		if($("#" + obj.value).hasClass("on-filter")){
@@ -62,7 +61,6 @@
 			$("#" + obj.value).addClass("on-filter");	
 		}
 		
-
 	}
 </script>
 </head>
@@ -129,7 +127,7 @@
 							</td>
 							<td>
 								<div class="dropdown">
-									<div id="ar" data-toggle="dropdown">
+									<div id="filter" data-toggle="dropdown">
 										Filter
 										<div class="caret"></div>
 									</div>
