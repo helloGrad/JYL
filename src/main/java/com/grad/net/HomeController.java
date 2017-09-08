@@ -42,6 +42,11 @@ public class HomeController {
 	}
 	
 
+	@RequestMapping(value = "/check", method = RequestMethod.GET)
+	public String check( Model model, MemberVo memberVo) {	
+		model.addAttribute("MemberVo", memberVo);		
+		return "mbinfo2";
+	}
 
 	
 	

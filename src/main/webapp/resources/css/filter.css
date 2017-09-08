@@ -1,0 +1,64 @@
+#filter, #sort, #ar {
+	width: 90%;
+	height: 100%;
+	border: none;
+	padding: 2%;
+}
+
+.caret {
+	text-align: right;
+}
+
+#second-filter {
+	min-width : 350px;
+}
+
+.dropdown-ul{
+	padding : 2%;
+	list-style: none;	
+}
+
+.dropdown-li{
+	padding : 5%;
+}
+
+input[type="checkbox"] {
+	margin: 5%;
+}
+
+.ar-item {
+	width : 30%;
+	letter-spacing: 2px;
+	padding : 3%;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+.de-item {
+	width : 30%;
+	padding : 5%;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+.on-filter {
+	background-color: #ccc;
+}
+
+.filter {
+	margin-top : 5%;
+}
+
+.gradlabel {
+	width: 40%;
+	border: 1px solid #ccc;
+	padding: 2%;
+	margin: 0 0 2% 0;
+	font-weight: normal;
+}
+
+input[type='checkbox'] {
+	
+	display: none;
+	
+}

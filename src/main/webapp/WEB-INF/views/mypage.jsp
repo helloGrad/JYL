@@ -18,12 +18,6 @@
 	<c:import url="/WEB-INF/views/include/header.jsp" />
 
 	<div class="container">
-		<!-- ///// filter (대분류) //////-->
-
-
-
-
-		<!-- ////// filter ///////-->
 		<div class="row">
 			<div class="col-lg-2"></div>
 			<div class="col-lg-8">
