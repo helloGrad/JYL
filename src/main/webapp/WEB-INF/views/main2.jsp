@@ -74,7 +74,7 @@
 				<table class="table table-bordered">
 					<tbody>
 						<tr>
-							<td>
+							<td class="filter-td">
 								<div class="dropdown">
 									<div data-toggle="dropdown" class="inner-table">
 										<div class="inner-tr">
@@ -84,8 +84,8 @@
 										<div class="caret"></div>
 									</div>
 
-									<form class="dropdown-menu">
-										<ul class="inner-td">
+									<form class="dropdown-menu" id="filter1">
+										<ul class="filter-ul">
 											<li class="dropdown-li"><h5>일정</h5> <label for="sche1"
 												class="sche-item" id="SCHE00001"> <input
 													type="checkbox" name="" id="sche1" value="SCHE00001"
@@ -119,11 +119,12 @@
 													onclick="changeClass(this);">석박사</label></li>
 											<li class="dropdown-li"><label for="amount"><h5>등록금</h5></label>
 												<input type="text" id="amount" readonly
-												style="border: 0; color: #6D6D6D; font-weight: bold;">
+												style="border: 0; color: #6D6D6D; font-weight: bold;"
+												class="inner-td">
 												<div id="slider-range-max"></div></li>
 										</ul>
 
-										<ul class="inner-td">
+										<ul class="filter-ul">
 											<li class="dropdown-li"><label for="ar0" class="ar-item"
 												id="전체"><input type="checkbox" class="filter-check"
 													id="ar0" name="" value="전체" onclick="changeClass(this);">전체</label>
@@ -183,11 +184,12 @@
 													value="AR00018" onclick="changeClass(this);">국외</label></li>
 										</ul>
 										<button type="submit" class="btn btn-primary filterBtn">저장</button>
+										<button type="submit" class="btn btn-primary filterBtn">저장</button>
 									</form>
 								</div>
 							</td>
 
-							<td>
+							<td class="filter-td">
 								<div class="dropdown">
 									<div data-toggle="dropdown">
 										<div class="inner-tr" id="sort">구분</div>
@@ -204,7 +206,10 @@
 												<button class="w3-button w3-white w3-border w3-round-large">모집중
 												</button></li>
 										</ul>
-										<button type="submit" class="btn btn-primary filterBtn">저장</button>
+										<div class="filterBtn">
+											<button type="submit" class="btn btn-primary">모두비우기</button>
+											<button type="submit" class="btn btn-primary">저장</button>
+										</div>
 									</form>
 								</div>
 							</td>

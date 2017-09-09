@@ -1,88 +1,90 @@
-
 /*필터 전체 */
-
 .filter {
-	margin-top : 5%;
+	margin-top: 5%;
 }
 
 /* dropdown 공통 */
-.dropdown-ul{
-	padding : 2%;
+.dropdown-ul {
+	padding: 2%;
 	list-style: none;
-	display: inline-block;	
+	display: inline-block;
 }
 
-.dropdown-li{
-	padding : 5%;
+.dropdown-li {
+	padding: 5%;
 }
-
 
 /*filter 1 */
 
 /* 체크박스 버튼 숨기기 */
-
 input[type="checkbox"] {
 	margin: 5%;
-	display: none;	
+	display: none;
 }
 
 /* 선택된 체크박스 css */
-
 .on-filter-check {
 	background-color: #ccc;
 }
 
 /* 조건/지역 리스트 체크박스 item */
 .sche-item {
-	width : 30%;
+	width: 30%;
 	letter-spacing: 2px;
-	padding : 2%;
+	padding: 2%;
 	border: 1px solid #ccc;
 	text-align: center;
+	font-weight: normal;
 }
 
 .de-item {
-	width : 30%;
-	padding : 5%;
+	width: 30%;
+	padding: 5%;
 	border: 1px solid #ccc;
 	text-align: center;
+	font-weight: normal;
 }
 
 .ar-item {
-	width : 30%;
+	width: 30%;
 	letter-spacing: 2px;
-	padding : 3%;
+	padding: 3%;
 	border: 1px solid #ccc;
 	text-align: center;
+	font-weight: normal;
 }
 
-
 .inner-tr {
-	width : 90%;
+	width: 90%;
 	display: inline-block;
 }
 
 .inner-td {
 	width: 46%;
-	padding : 1%;
-	margin : 0;
+	padding: 1%;
+	margin: 0;
 	display: inline-block;
 	list-style: none;
 }
 
+.filter-ul {
+	width: 46%;
+	padding: 1%;
+	margin: 0;
+	display: inline-block;
+	list-style: none;	
+}
 
 /*filter 2*/
 
 /* 구분 글자 여백 */
-
 #sort {
 	padding: 2%;
 }
 
 /* filter2 dropdown 메뉴 */
-
-#dropdown-sort{
-	width : 100%;
+#dropdown-sort {
+	width: 100%;
 }
 
 .second-dropdown-ul {
@@ -91,12 +93,42 @@ input[type="checkbox"] {
 }
 
 .second-dropdown-li {
-	padding : 1%;
+	padding: 1%;
 }
 
-.filterBtn{
+.filterBtn {
 	margin: 1%;
 	margin-left: 85%
 }
 
+@media screen and (max-width: 400px) {
+	.filter-td {
+		width: 50%;
+		margin: 0;
+		padding: 0;
+	}
+	.inner-tr {
+		width: 80%;
+		margin: 0;
+		padding: 0;
+	}
+	.filter-ul, .de-item, .ar-item, .sche-item, .dropdown-menu, .dropdown{
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	
+	#filter1{
+	width : 100;}
+}
 
+@media screen and (min-width: 401px) and (max-width: 600px) {
+	.filter-td {
+		width: 50%;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+@media screen and (min-width: 801px) {
+}
