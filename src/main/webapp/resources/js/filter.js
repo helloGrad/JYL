@@ -3,7 +3,6 @@ var filterModalOpen = function() {
 
 	modal.style.display = "block";
 	
-	console.log("filter modal : "+modal);
 
 	window.onclick = function(event) {
 		if (event.target == modal) {
@@ -13,21 +12,6 @@ var filterModalOpen = function() {
 
 }
 
-
-var filterModalOpen2 = function() {
-	var modal = document.getElementById('filter2');
-
-	modal.style.display = "block";
-	
-	console.log("filter modal : "+modal);
-
-	window.onclick = function(event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
-		}
-	}
-
-}
 
 $( function() {
 	$("#slider-range-max").slider({

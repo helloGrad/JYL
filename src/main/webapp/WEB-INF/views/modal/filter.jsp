@@ -47,7 +47,7 @@
 							onclick="changeClass(this);">연구실
 					</label></li>
 
-					<li class="filter-li"><h6 class="filter-font"><i class="glyphicon glyphicon-book"></i> 일정</h6>
+					<li class="filter-li"><h6 class="filter-font"><i class="glyphicon glyphicon-list-alt"></i> 일정</h6>
 						<hr class="filter-hr"> <label for="sche1" class="sche-item"
 						id="SCHE00001"> <input type="checkbox" name="" id="sche1"
 							value="SCHE00001" onclick="changeClass(this);">학회
@@ -59,7 +59,7 @@
 							onclick="changeClass(this);">세미나
 					</label></li>
 
-					<li class="filter-li"><h6><i class="glyphicon glyphicon-book"></i> 학위</h6>
+					<li class="filter-li"><h6><i class="glyphicon glyphicon-education"></i> 학위</h6>
 						<hr class="filter-hr"> <label for="de1" id="DE00001"
 						class="de-item"><input type="checkbox" name=""
 							value="DE00001" id="de1" onclick="changeClass(this);">석사</label>
@@ -68,14 +68,14 @@
 							onclick="changeClass(this);">박사</label> <label for="de3"
 						class="de-item" id="DE00003"><input type="checkbox"
 							name="" id="de3" value="DE00003" onclick="changeClass(this);">석박사</label></li>
-					<li class="filter-li"><label for="amount"><h6><i class="glyphicon glyphicon-book"></i> 등록금</h6>
+					<li class="filter-li"><label for="amount"><h6><i class="glyphicon glyphicon-pencil"></i> 등록금</h6>
 					</label> <input type="text" id="amount" readonly
 						style="border: 0; color: #FF8000; font-weight:normal;">
 						<div id="slider-range-max"></div></li>
 				</ul>
 
 				<ul class="filter-ul col-lg-6">
-					<li class="filter-li"><h6><i class="glyphicon glyphicon-book"></i> 지역</h6>
+					<li class="filter-li"><h6><i class="glyphicon glyphicon-map-marker"></i> 지역</h6>
 						<hr class="filter-hr"> <label for="ar0" class="ar-item"
 						id="all"><input type="checkbox" class="filter-check"
 							id="ar0" name="" value="all" onclick="changeClass(this);">국내</label>
