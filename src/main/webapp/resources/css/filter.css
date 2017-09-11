@@ -1,57 +1,14 @@
-/*필터 전체 */
+/*필터 modal 띄우기 전 */
 .filter {
-	margin-top: 5%;
+	margin-top: 10%;
+	/*border-top: solid 1px #ccc;
+	border-bottom: solid 1px #ccc;*/
 }
 
-/* dropdown 공통 */
-.dropdown-ul {
-	padding: 2%;
-	list-style: none;
+.filter-td {
+	width: 100%;
+	padding: 1%;
 	display: inline-block;
-}
-
-.dropdown-li {
-	padding: 5%;
-}
-
-/*filter 1 */
-
-/* 체크박스 버튼 숨기기 */
-input[type="checkbox"] {
-	margin: 5%;
-	display: none;
-}
-
-/* 선택된 체크박스 css */
-.on-filter-check {
-	background-color: #ccc;
-}
-
-/* 조건/지역 리스트 체크박스 item */
-.sche-item {
-	width: 30%;
-	letter-spacing: 2px;
-	padding: 2%;
-	border: 1px solid #ccc;
-	text-align: center;
-	font-weight: normal;
-}
-
-.de-item {
-	width: 30%;
-	padding: 5%;
-	border: 1px solid #ccc;
-	text-align: center;
-	font-weight: normal;
-}
-
-.ar-item {
-	width: 30%;
-	letter-spacing: 2px;
-	padding: 3%;
-	border: 1px solid #ccc;
-	text-align: center;
-	font-weight: normal;
 }
 
 .inner-tr {
@@ -61,28 +18,124 @@ input[type="checkbox"] {
 
 .inner-td {
 	width: 46%;
+	margin: 0;
+	display: inline-block;
+	list-style: none;
+	display: inline-block;
+}
+
+.filter-hr {
+	margin: 1%;
+	padding : 1%;
+}
+
+/*공통 */
+
+.close {
+	padding-top: 5%;
+	padding: 20px 20px 0 10px;
+	cursor: pointer;
+}
+
+.filter-ul {
 	padding: 1%;
 	margin: 0;
 	display: inline-block;
 	list-style: none;
 }
 
-.filter-ul {
-	width: 46%;
+.filter-li {
+	padding: 3%;
+	diplay : inline-block;
+}
+
+
+.btn-ul {
+	width: 100%;
 	padding: 1%;
 	margin: 0;
 	display: inline-block;
-	list-style: none;	
+	text-align: right;
 }
 
-/*filter 2*/
+.btn-li {
+	width: 20%;
+	display: inline-block;
+}
+
+.filter-btn {
+	width: 100%;
+	margin: 1%;
+	background-color: #fff;
+	border : solid 1px #ccc;
+	border-radius: 4px;
+	padding : 5%;
+}
+
+.filter-btn:hover{
+	background-color: #FF8000;
+	border-color : #FF8000;
+	color : #fff;
+}
+
+
+.filter-font {
+	font-weight: normal;
+}
+
+
+/* 체크박스 버튼 숨기기 */
+input[type="checkbox"] {
+	margin: 5%;
+	display: none;
+}
+
+
+
+/* 조건/지역 리스트 체크박스 item */
+.sche-item, .de-item, .org-item, .ar-item {
+	letter-spacing: 2px;
+	padding: 2%;
+	border-radius : 4px;
+	background-color : #EFEFEF;
+	text-align: center;
+	font-weight: normal;
+	cursor: pointer;
+}  
+
+.sche-item {
+	width: 32%;
+}
+
+.de-item {
+	width: 32%;
+	}
+
+.ar-item {
+	width: 32%;
+}
+
+.org-item {
+	width: 49%;
+}
+
+/* 선택된 체크박스 css */
+.on-filter-check {
+	background-color: #2080D0;
+	color : #fff;
+}
+
+#all, #AR00018 {
+	width: 49%;
+}
+
+/*정렬 구분  메뉴*/
 
 /* 구분 글자 여백 */
 #sort {
 	padding: 2%;
 }
 
-/* filter2 dropdown 메뉴 */
 #dropdown-sort {
 	width: 100%;
 }
@@ -96,39 +149,79 @@ input[type="checkbox"] {
 	padding: 1%;
 }
 
-.filterBtn {
-	margin: 1%;
-	margin-left: 85%
+.sort {
+	width: 15%;
+	margin-left: 33%;
 }
 
+.filter-select {
+	width: 100%;
+	border: none;
+}
+
+/* modal css */
+.filter-modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.filter-modal-content {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto;
+	border: 1px solid #888;
+	width: 50%;
+}
+
+/* 모바일 css */
 @media screen and (max-width: 400px) {
-	.filter-td {
-		width: 50%;
-		margin: 0;
-		padding: 0;
-	}
-	.inner-tr {
-		width: 80%;
-		margin: 0;
-		padding: 0;
-	}
-	.filter-ul, .de-item, .ar-item, .sche-item, .dropdown-menu, .dropdown{
+
+}
+
+@media screen and (min-width: 300px) and (max-width: 700px) {
+	.filter-modal-content, .filter-ul {
 		width: 100%;
 		margin: 0;
 		padding: 0;
 	}
-	
-	#filter1{
-	width : 100;}
-}
-
-@media screen and (min-width: 401px) and (max-width: 600px) {
-	.filter-td {
-		width: 50%;
+	.filter-modal {
+		padding-top: 0px;
+	}
+	.de-item, .ar-item, .sche-item {
+		width: 32%;
 		margin: 0;
+		display: inline-block;;
+	}
+	
+	.ar-item {
+		margin-bottom: 2%;
+	}
+	
+	.org-item {
+		width: 49%;
 		padding: 0;
+		display: inline-block;
+	}
+	#filter-form {
+		width: 100%;
+	}
+	.filter {
+		margin-top: 30%;
+	}
+	.filter-li {
+		padding: 2%;
 	}
 }
 
-@media screen and (min-width: 801px) {
+
+@media screen and (min-width: 800x) and (max-width: 1100px){
+
 }
+

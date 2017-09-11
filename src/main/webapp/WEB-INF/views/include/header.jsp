@@ -35,12 +35,11 @@
 	rel="stylesheet">
 
 
-
-
 <title>하이그래드넷</title>
 </head>
 
 <nav class="navbar navbar-default navbar-fixed-top">
+	<c:import url="/WEB-INF/views/modal/filter.jsp" />
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -90,7 +89,7 @@
 		</div>
 	</div>
 
-	
+
 	<!-- 로그인 modal-->
 	<div id="login" class="modal">
 		<div class="modal-content">
@@ -213,6 +212,7 @@
 			</div>
 		</div>
 	</div>
+
 </nav>
 
 <script type="text/javascript"
