@@ -187,5 +187,37 @@
 			]]>
 			
 	</update>
+	
+	
+	
+		<!--정예린 -->
+		<select id="getcounselingList2" resultType="counselingVo" parameterType="long">
+		
+			
+			<![CDATA[
+			select r.rownum rownum, r.wrtbtNo wrtbtNo,r.wrtbtText wrtbtText,r.wrtbtTypeDstnct wrtbtTypeDstnct,r.avlblBeginDt avlblBeginDt,r.avlblEndDt avlblEndDt,r.mbNo mbNo,r.bbsNo bbsNo,r.wrtbtDstnct wrtbtDstnct,
+			r.rcmdCo rcmdCo,r.ncmdCo ncmdCo,r.findCo findCo,r.groupNo groupNo,r.orderNo orderNo,r.depth depth,r.wrtbtTitle wrtbtTitle,r.conslBbsDstnct conslBbsDstnct,r.orgnzNo orgnzNo,
+			r.rewrtbtNo rewrtbtNo, r.rebbsNo rebbsNo, r.rewrtbtDstnct rewrtbtDstnct, r.rembNo rembNo, r.renknm renknm, r.reavlblBeginDt reavlblBeginDt, r.rewrtbtText rewrtbtText, r.rercmdCo rercmdCo
+			from (SELECT r.rownum as rownum, r.wrtbtNo wrtbtNo,r.wrtbtText wrtbtText,r.wrtbtTypeDstnct wrtbtTypeDstnct,r.avlblBeginDt avlblBeginDt,r.avlblEndDt avlblEndDt,r.mbNo mbNo,r.bbsNo bbsNo,r.wrtbtDstnct wrtbtDstnct,
+				r.rcmdCo rcmdCo,r.ncmdCo ncmdCo,r.findCo findCo,r.groupNo groupNo,r.orderNo orderNo,r.depth depth,r.wrtbtTitle wrtbtTitle,r.conslBbsDstnct conslBbsDstnct,r.orgnzNo orgnzNo,
+				r.rewrtbtNo rewrtbtNo, r.rebbsNo rebbsNo, r.rewrtbtDstnct rewrtbtDstnct, r.rembNo rembNo, r.renknm renknm, r.reavlblBeginDt reavlblBeginDt, r.rewrtbtText rewrtbtText, r.rercmdCo rercmdCo
+				FROM (SELECT @RNUM:=@RNUM+1 'ROWNUM' , a.* FROM (SELECT @RNUM:=0) R, 
+				(select WRTBT_NO wrtbtNo, WRTBT_TEXT wrtbtText, WRTBT_TYPE_DSTNCT wrtbtTypeDstnct, AVLBL_BEGIN_DT avlblBeginDt, AVLBL_END_DT avlblEndDt, MB_NO mbNo,
+			 BBS_NO bbsNo, WRTBT_DSTNCT wrtbtDstnct, RCMD_CO rcmdCo,NCMD_CO ncmdCo,FIND_CO findCo,
+			 GROUP_NO groupNo,ORDER_NO orderNo,DEPTH depth,WRTBT_TITLE wrtbtTitle, 
+			 CONSL_BBS_DSTNCT conslBbsDstnct,ORGNZ_NO orgnzNo, (select count(*) from wetbt e where w. WRTBT_NO= e.PRNTS_WRTBT_NO) count,              
+             w.WRTBT_NO rewrtbtNo, w.BBS_NO rebbsNo, w.WRTBT_DSTNCT rewrtbtDstnct,
+			(select MB_NO from wetbt e where w. WRTBT_NO= e.PRNTS_WRTBT_NO group by RCMD_CO desc limit 1) rembNo,
+             (select m.nknm from wetbt e, mb m where w. WRTBT_NO= e.PRNTS_WRTBT_NO and m.mb_no=e.MB_NO  group by RCMD_CO desc limit 1) renknm,
+             (select AVLBL_BEGIN_DT from wetbt e where w. WRTBT_NO= e.PRNTS_WRTBT_NO    group by RCMD_CO desc limit 1) reavlblBeginDt,
+             (select WRTBT_TEXT  from wetbt e where w. WRTBT_NO= e.PRNTS_WRTBT_NO    group by RCMD_CO desc limit 1) rewrtbtText,
+             (select RCMD_CO  from wetbt e where w. WRTBT_NO= e.PRNTS_WRTBT_NO   group by RCMD_CO desc limit 1) rercmdCo
+			 from  wetbt w
+			 where WRTBT_TYPE_DSTNCT='원글'
+			 order by RCMD_CO desc) a) r) r
+             where rownum between #{startNo}+1 and #{startNo}+10;			
+			]]>
+		</select>	
+	
 
 </mapper>

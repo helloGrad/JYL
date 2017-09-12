@@ -164,5 +164,15 @@ public class CounselingService {
 		counselingDao.insertLike(map);
 
 	}
+
+	
+	/*
+	 * 정예린 2017-09-12
+	 */
+	public List<CounselingVo> getCounselingList2(Long startNo) {
+		
+		return counselingDao.getCounselingList2(startNo);
+	}
+
 	
 }

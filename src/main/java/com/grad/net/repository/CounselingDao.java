@@ -138,4 +138,14 @@ public class CounselingDao {
 	public void updateUpDislike(Long wrtbtNo) {
 		sqlSession.update("counseling.updateUpDislike",wrtbtNo);
 	}
+
+	
+	/*
+	 * 정예린 2017-09-12
+	 */
+	public List<CounselingVo> getCounselingList2(Long startNo) {
+		
+		return sqlSession.selectList("counseling.getcounselingList2",startNo);
+	}
+
 }

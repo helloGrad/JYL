@@ -1,7 +1,9 @@
 package com.grad.net.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -85,6 +87,22 @@ public class CounselingController {
 		
 
 		return JSONResult.success(result);
+	}
+	
+	/*
+	 * 정예린 2017-09-12
+	 */
+	@ResponseBody
+	@RequestMapping("/list")
+	public JSONResult list(@RequestParam(value="sno", required=true, defaultValue="0") Long startNo){
+		
+		System.out.println("++++"+startNo);
+		List<CounselingVo> list = counselingService.getCounselingList2(startNo); 
+		
+		for(CounselingVo vo : list) {
+			System.out.println(list);
+		}
+		return JSONResult.success(list);
 	}
 
 }

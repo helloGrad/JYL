@@ -8,26 +8,18 @@
 <head>
 <meta charset="UTF-8">
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
-<link
-	href="${pageContext.request.contextPath}/resources/css/higrad-signup.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/filter.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/filter.css"
+	rel="stylesheet">
+<!--  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 
 </head>
 <body>
-
+	<!-- 정예린 -->
 	<!-- filter modal-->
 	<div id="filter" class="filter-modal">
 		<div class="filter-modal-content">
@@ -38,7 +30,9 @@
 			<form id="filter-form col-lg-12">
 				<ul class="filter-ul col-lg-6">
 
-					<li class="filter-li"><h6 class="filter-font"><i class="glyphicon glyphicon-check"></i>공고구분</h6>
+					<li class="filter-li"><h5 class="filter-font">
+							<i class="glyphicon glyphicon-check"></i>공고구분
+						</h5>
 						<hr class="filter-hr"> <label for="org1" class="org-item"
 						id="ORG00001"> <input type="checkbox" name="" id="org1"
 							value="ORG00001" onclick="changeClass(this);">대학원
@@ -47,7 +41,9 @@
 							onclick="changeClass(this);">연구실
 					</label></li>
 
-					<li class="filter-li"><h6 class="filter-font"><i class="glyphicon glyphicon-list-alt"></i> 일정</h6>
+					<li class="filter-li"><h5 class="filter-font">
+							<i class="glyphicon glyphicon-list-alt"></i> 일정
+						</h5>
 						<hr class="filter-hr"> <label for="sche1" class="sche-item"
 						id="SCHE00001"> <input type="checkbox" name="" id="sche1"
 							value="SCHE00001" onclick="changeClass(this);">학회
@@ -59,7 +55,9 @@
 							onclick="changeClass(this);">세미나
 					</label></li>
 
-					<li class="filter-li"><h6><i class="glyphicon glyphicon-education"></i> 학위</h6>
+					<li class="filter-li"><h5>
+							<i class="glyphicon glyphicon-education"></i> 학위
+						</h5>
 						<hr class="filter-hr"> <label for="de1" id="DE00001"
 						class="de-item"><input type="checkbox" name=""
 							value="DE00001" id="de1" onclick="changeClass(this);">석사</label>
@@ -68,14 +66,17 @@
 							onclick="changeClass(this);">박사</label> <label for="de3"
 						class="de-item" id="DE00003"><input type="checkbox"
 							name="" id="de3" value="DE00003" onclick="changeClass(this);">석박사</label></li>
-					<li class="filter-li"><label for="amount"><h6><i class="glyphicon glyphicon-pencil"></i> 등록금</h6>
-					</label> <input type="text" id="amount" readonly
-						style="border: 0; color: #FF8000; font-weight:normal;">
+					<li class="filter-li"><label for="amount"><h5>
+								<i class="glyphicon glyphicon-pencil"></i> 등록금
+							</h5> </label> <input type="text" id="amount" readonly
+						style="border: 0; color: #FF8000; font-weight: normal;">
 						<div id="slider-range-max"></div></li>
 				</ul>
 
 				<ul class="filter-ul col-lg-6">
-					<li class="filter-li"><h6><i class="glyphicon glyphicon-map-marker"></i> 지역</h6>
+					<li class="filter-li"><h5>
+							<i class="glyphicon glyphicon-map-marker"></i> 지역
+						</h5>
 						<hr class="filter-hr"> <label for="ar0" class="ar-item"
 						id="all"><input type="checkbox" class="filter-check"
 							id="ar0" name="" value="all" onclick="changeClass(this);">국내</label>
@@ -135,10 +136,8 @@
 							value="AR00017" onclick="changeClass(this);">제주</label></li>
 				</ul>
 				<ul class="btn-ul">
-					<li class="btn-li"><button type="submit"
-							class="filter-btn">저장</button></li>
-					<li class="btn-li"><button type="submit"
-							class="filter-btn">초기화</button></li>
+					<li class="btn-li"><button type="submit" class="filter-btn">저장</button></li>
+					<li class="btn-li"><button type="submit" class="filter-btn">초기화</button></li>
 				</ul>
 			</form>
 

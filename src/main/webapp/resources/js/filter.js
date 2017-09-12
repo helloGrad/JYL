@@ -12,7 +12,6 @@ var filterModalOpen = function() {
 
 }
 
-
 $( function() {
 	$("#slider-range-max").slider({
 		range : "max",
