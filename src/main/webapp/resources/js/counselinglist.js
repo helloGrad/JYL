@@ -40,7 +40,7 @@ var fetchList = function() {
 			}
 			// detect end
 
-			if (response.data.length < 5) {
+			if (response.data.length < 10) {
 				console.log(response.data.length);
 				isEnd = true;
 			}
