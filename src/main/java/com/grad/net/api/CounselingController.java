@@ -99,9 +99,9 @@ public class CounselingController {
 		System.out.println("++++"+startNo);
 		List<CounselingVo> list = counselingService.getCounselingList2(startNo); 
 		
-		for(CounselingVo vo : list) {
+		/*for(CounselingVo vo : list) {
 			System.out.println(list);
-		}
+		}*/
 		return JSONResult.success(list);
 	}
 
